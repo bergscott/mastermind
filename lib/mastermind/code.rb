@@ -10,7 +10,7 @@ module Mastermind
     end
 
     def self.new_from_array(values)
-      values.map { |value| Cell.new(value) }
+      Code.new(values.map { |value| Cell.new(value) })
     end
 
     def initialize(cells)
@@ -46,6 +46,10 @@ module Mastermind
         end
       end
       {exact: exact, color: color_only}
+    end
+
+    def to_s
+      cells.join(" ")
     end
 
     protected

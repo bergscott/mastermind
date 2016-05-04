@@ -29,5 +29,12 @@ module Mastermind
       end
     end
 
+    context "#to_s" do
+      it "returns a string representation of itself" do
+        cell = Cell.new(1)
+        expect(cell.to_s).to eq "1"
+      end
+    end
+
   end
 end

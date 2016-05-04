@@ -28,17 +28,21 @@ module Mastermind
       end
     end
 
-    context "#color_name" do
-      it "translates a number to its color" do
-        game = Game.new
-        expect(game.color_name(1)).to eq "red"
-      end
-    end
-
     context "#get_guess" do
       it "retrieves a guess from the user" do
         game = Game.new
         expect(game.get_guess("1 2 3 4")).to eq Code.new_from_array([1,2,3,4])
+      end
+    end
+
+    context "#winner?" do
+      it "returns true if code was guessed correctly" do
+        game = Game.new
+        expect(game.winner?({exact: 4})).to be true
+      end
+      it "returns false if code does not match exactly" do
+        game = Game.new
+        expect(game.winner?({exact: 3})).to be false
       end
     end
         

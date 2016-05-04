@@ -80,5 +80,12 @@ module Mastermind
       end
     end
 
+    context "#to_s" do
+      it "returns a string representation of itself" do
+        code = Code.new_from_array([1,2,3,4])
+        expect(code.to_s).to eq "1 2 3 4"
+      end
+    end
+
   end
 end

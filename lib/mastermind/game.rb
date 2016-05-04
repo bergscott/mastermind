@@ -17,7 +17,35 @@ module Mastermind
       Code.new_from_array(parse_user_guess(guess))
     end
 
+    def winner?(guess_hash)
+      guess_hash[:exact] == code_length
+    end
+
+    def play
+      while turns > 0
+        puts "\n#{turns} guesses remaining"
+        result = evaluate_guess
+        if winner?(result)
+          puts "\nYou win!"
+          return true
+        else 
+          puts show_result(result)
+          @turns -= 1
+        end
+      end
+      puts "\nYou lose! secret code was #{code}"
+      false
+    end
+
     private
+
+    def evaluate_guess
+      puts "\nEnter guess (separate cells with spaces):"
+      code.compare(get_guess)
+    rescue RuntimeError
+      puts "\nInvalid guess!"
+      retry
+    end
 
     def default_code_length
       4
@@ -31,19 +59,13 @@ module Mastermind
       12
     end
 
-    def color_dict
-      {1 => "red", 
-       2 => "blue", 
-       3 => "green", 
-       4 => "yellow", 
-       5 => "black", 
-       6 => "white", 
-       7 => "purple", 
-       8 => "orange"}
-    end
-
     def parse_user_guess(guess)
       guess.split.map { |v| v.to_i }
+    end
+
+    def show_result(result)
+      "\nGuessed #{result[:exact]} slots correctly, and have #{result[:color]}"\
+      " numbers correct, but in the wrong position.\n"
     end
 
   end

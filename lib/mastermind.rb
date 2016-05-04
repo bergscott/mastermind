@@ -1,9 +1,9 @@
-require "mastermind/version"
+require_relative "mastermind/version"
 
 module Mastermind
   # Your code goes here...
 end
 
-require "mastermind/cell"
-require "mastermind/code"
-require "mastermind/game"
+require_relative "mastermind/cell"
+require_relative "mastermind/code"
+require_relative "mastermind/game"
