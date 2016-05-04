@@ -21,6 +21,13 @@ module Mastermind
       end
 
     end    
+
+    context ".new_from_array" do
+      it "returns a code of same length as input" do
+        input = [1,2,3,4]
+        expect(Code.new_from_array(input).length).to eq input.length
+      end
+    end
     
     context "#initialize" do
       it "initializes the code with a number of cells equal to the length of
@@ -34,6 +41,19 @@ module Mastermind
       it "reports its length (number of cells)" do
         code = Code.new([1,2,3,4])
         expect(code.length).to eq 4
+      end
+    end
+
+    context "#==" do
+      it "returns true if two code's cells are equal" do
+        code1 = Code.new_from_array([1,2,3,4])
+        code2 = Code.new_from_array([1,2,3,4])
+        expect(code1 == code2).to be true
+      end
+      it "returns false if two code's cells are not equal" do
+        code1 = Code.new_from_array([1,2,3,4])
+        code2 = Code.new_from_array([1,2,3,5])
+        expect(code1 == code2).to be false
       end
     end
 

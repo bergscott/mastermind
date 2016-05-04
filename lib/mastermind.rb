@@ -6,3 +6,4 @@ end
 
 require "mastermind/cell"
 require "mastermind/code"
+require "mastermind/game"

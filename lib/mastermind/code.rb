@@ -9,12 +9,20 @@ module Mastermind
       Code.new(cells)
     end
 
+    def self.new_from_array(values)
+      values.map { |value| Cell.new(value) }
+    end
+
     def initialize(cells)
       @cells = cells
     end
 
     def length
       @cells.length
+    end
+
+    def ==(another_code)
+      cells == another_code.cells
     end
 
     def compare(guess)

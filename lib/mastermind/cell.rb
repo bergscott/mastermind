@@ -5,6 +5,10 @@ module Mastermind
     def initialize(value = "")
       @value = value
     end
+
+    def ==(another_cell)
+      value == another_cell.value  
+    end
     
   end
 end

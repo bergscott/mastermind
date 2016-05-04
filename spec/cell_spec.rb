@@ -15,5 +15,19 @@ module Mastermind
       end
     end
 
+    context "#==" do
+      it "returns true if the values of two cells are equal" do
+        cell1 = Cell.new(1)
+        cell2 = Cell.new(1)
+        expect(cell1 == cell2).to be true
+      end
+
+      it "returns false if the values of two cells are not equal" do
+        cell1 = Cell.new("a")
+        cell2 = Cell.new(2)
+        expect(cell1 == cell2).to be false
+      end
+    end
+
   end
 end
