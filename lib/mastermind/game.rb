@@ -1,6 +1,6 @@
 module Mastermind
   class Game
-    attr_reader :turns, :code_length, :colors, :code
+    attr_reader :turns, :code_length, :colors, :code, :player
 
     def initialize(input = {})
       @code_length = input.fetch(:code_length, default_code_length)
@@ -9,24 +9,17 @@ module Mastermind
       @code = Code.new_random((1..colors).to_a, code_length)
     end
 
-    def color_name(n)
-      color_dict.fetch(n)
-    end
-
-    def get_guess(guess = gets.chomp)
-      Code.new_from_array(parse_user_guess(guess))
-    end
-
     def winner?(guess_hash)
       guess_hash[:exact] == code_length
     end
 
     def play
+      @player ||= get_player
       while turns > 0
         puts "\n#{turns} guesses remaining"
         result = evaluate_guess
         if winner?(result)
-          puts "\nYou win!"
+          puts "\n#{player.name} wins!"
           return true
         else 
           puts show_result(result)
@@ -37,11 +30,28 @@ module Mastermind
       false
     end
 
+    def get_player(choice=nil, name=nil)
+      loop do
+        unless choice
+          puts "Enter 'H' for human guesser or 'C' for CPU guesser"
+          choice = gets.chomp
+        end
+        case choice.upcase
+        when "H"
+          return HumanPlayer.new(name)
+        when "C"
+          return ComputerPlayer.new(name)
+        else
+          puts "Invalid choice, try again!"
+          choice = nil
+        end
+      end
+    end
+
     private
 
     def evaluate_guess
-      puts "\nEnter guess (separate cells with spaces):"
-      code.compare(get_guess)
+      code.compare(player.get_guess)
     rescue RuntimeError
       puts "\nInvalid guess!"
       retry
@@ -57,10 +67,6 @@ module Mastermind
 
     def default_turns
       12
-    end
-
-    def parse_user_guess(guess)
-      guess.split.map { |v| v.to_i }
     end
 
     def show_result(result)

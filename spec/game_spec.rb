@@ -28,10 +28,15 @@ module Mastermind
       end
     end
 
-    context "#get_guess" do
-      it "retrieves a guess from the user" do
+    context "get_player" do
+      it "returns a HumanPlayer when user inputs H" do
         game = Game.new
-        expect(game.get_guess("1 2 3 4")).to eq Code.new_from_array([1,2,3,4])
+        expect(game.get_player(choice="h", name="Test")).to be_a HumanPlayer
+      end
+
+      it "returns a ComputerPlayer when user inputs C" do
+        game = Game.new
+        expect(game.get_player(choice="c", name="Bot")).to be_a ComputerPlayer
       end
     end
 
