@@ -40,7 +40,8 @@ module Mastermind
         when "H"
           return HumanPlayer.new(name)
         when "C"
-          return ComputerPlayer.new(name)
+          return ComputerPlayer.new(name: name, code_length: code_length,
+                                    num_colors: colors)
         else
           puts "Invalid choice, try again!"
           choice = nil
