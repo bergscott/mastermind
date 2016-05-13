@@ -40,7 +40,7 @@ module Mastermind
         end
         case choice.upcase
         when "H"
-          return HumanPlayer.new(name)
+          return HumanPlayer.new(name: name, num_colors: colors)
         when "C"
           return ComputerPlayer.new(name: name, code_length: code_length,
                                     num_colors: colors)
