@@ -9,12 +9,14 @@ module Mastermind
       @possibilities = init_possibilities(@code_colors, @code_length)
     end
 
-    def get_guess(result)
+    def get_guess(result, debug=false)
       if result
         filter_possibilities(result)
       end
-      self.last_guess = possibility_to_code(possibilities.sample)
-      puts "\nComputer guesses #{last_guess}"
+      guess_index = rand(possibilities.length)
+      self.last_guess = possibility_to_code(possibilities[guess_index])
+      possibilities.delete_at(guess_index)
+      puts "\nComputer guesses #{last_guess}" unless debug
       last_guess
     end
 

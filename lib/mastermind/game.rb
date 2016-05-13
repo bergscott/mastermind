@@ -16,15 +16,16 @@ module Mastermind
     def play
       @player ||= get_player
       result = nil
-      while turns > 0
-        puts "\n#{turns} guesses remaining"
+      turns_left = turns
+      while turns_left > 0
+        puts "\n#{turns_left} guesses remaining"
         result = evaluate_guess(result)
         if winner?(result)
-          puts "\n#{player.name} wins!"
+          puts "\n#{player.name} wins after #{1+turns-turns_left} guesses!"
           return true
         else 
           puts show_result(result)
-          @turns -= 1
+          turns_left -= 1
         end
       end
       puts "\nYou lose! secret code was #{code}"
@@ -34,7 +35,7 @@ module Mastermind
     def get_player(choice=nil, name=nil)
       loop do
         unless choice
-          puts "Enter 'H' for human guesser or 'C' for CPU guesser"
+          puts "Enter 'H' for human guesser or 'C' for CPU guesser:"
           choice = gets.chomp
         end
         case choice.upcase

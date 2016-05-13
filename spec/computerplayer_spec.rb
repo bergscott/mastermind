@@ -17,20 +17,26 @@ module Mastermind
     context "#get_guess" do
       it "returns a Code object" do
         player = ComputerPlayer.new(code_length: 4, num_colors: 6)
-        expect(player.get_guess(nil)).to be_a Code
+        expect(player.get_guess(nil, debug=true)).to be_a Code
       end
 
       it "sets a last guess" do
         player = ComputerPlayer.new(code_length: 4, num_colors: 6)
-        player.get_guess(nil)
+        player.get_guess(nil, debug=true)
         expect(player.last_guess).to be_a Code
       end
 
-      it "filters possibilities" do
+      it "deletes the returned guess from possibilities" do
         player = ComputerPlayer.new(code_length: 4, num_colors: 6)
-        player.get_guess(nil)
+        guess = player.get_guess(nil, debug=true)
+        expect(player.possibilities.include?(guess.to_a)).to be false
+      end
+
+      it "filters possibilities if a last guess exists" do
+        player = ComputerPlayer.new(code_length: 4, num_colors: 6)
+        player.get_guess(nil, debug=true)
         possibilities1 = Array.new(player.possibilities)
-        player.get_guess({exact: 1, color: 1})
+        player.get_guess({exact: 1, color: 1}, debug=true)
         expect(player.possibilities.length).to be < possibilities1.length
       end
 

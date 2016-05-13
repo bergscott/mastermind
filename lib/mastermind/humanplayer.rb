@@ -10,7 +10,7 @@ module Mastermind
 
     def get_guess(_result, guess=nil)
       unless guess
-        puts "\nEnter guess (separate cells with spaces:)"
+        puts "\nEnter guess (separate cells with spaces):"
         guess = gets.chomp
       end
       Code.new_from_array(parse_user_guess(guess))

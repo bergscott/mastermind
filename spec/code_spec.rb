@@ -87,5 +87,13 @@ module Mastermind
       end
     end
 
+    context "#to_a" do
+      it "returns an array representation of itself" do
+        code_array = [1, 2, 3]
+        expect(Code.new_from_array(code_array).to_a).to eq code_array
+      end
+    end
+
+
   end
 end

@@ -52,6 +52,10 @@ module Mastermind
       cells.join(" ")
     end
 
+    def to_a
+      cells.map { |cell| cell.value }
+    end
+
     protected
 
     def cells
