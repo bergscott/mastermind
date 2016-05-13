@@ -8,7 +8,7 @@ module Mastermind
       super(name)
     end
 
-    def get_guess(guess=nil)
+    def get_guess(_result, guess=nil)
       unless guess
         puts "\nEnter guess (separate cells with spaces:)"
         guess = gets.chomp

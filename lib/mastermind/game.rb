@@ -15,9 +15,10 @@ module Mastermind
 
     def play
       @player ||= get_player
+      result = nil
       while turns > 0
         puts "\n#{turns} guesses remaining"
-        result = evaluate_guess
+        result = evaluate_guess(result)
         if winner?(result)
           puts "\n#{player.name} wins!"
           return true
@@ -51,8 +52,8 @@ module Mastermind
 
     private
 
-    def evaluate_guess
-      code.compare(player.get_guess)
+    def evaluate_guess(result)
+      code.compare(player.get_guess(result))
     rescue RuntimeError
       puts "\nInvalid guess!"
       retry

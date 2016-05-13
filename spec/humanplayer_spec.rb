@@ -12,7 +12,7 @@ module Mastermind
     context "#get_guess" do
       it "retrieves a guess from the user" do
         player = HumanPlayer.new(name="Human")
-        expect(player.get_guess("1 2 3 4")).to eq Code.new_from_array([1,2,3,4])
+        expect(player.get_guess(nil, "1 2 3 4")).to eq Code.new_from_array([1,2,3,4])
       end
     end
 

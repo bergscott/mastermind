@@ -6,5 +6,9 @@ module Mastermind
       @name = name
     end
 
+    def get_guess(_result)
+      raise NotImplementedError
+    end
+
   end
 end
